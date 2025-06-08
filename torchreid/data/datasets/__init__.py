@@ -3,62 +3,42 @@ from __future__ import print_function, absolute_import
 import copy
 
 from .image import (
-    GRID, PRID, CUHK01, CUHK02, CUHK03, MSMT17, VIPeR, Market1501,
-    DukeMTMCreID, iLIDS, OccludedDuke, OccludedReID, Partial_iLIDS, Partial_REID, PDukemtmcReid,
-    P_ETHZ,Market1501_Aug
+    Market1501, DukeMTMCreID, OccludedDuke, OccludedReID, Partial_REID, PDukemtmcReid,
+    Market1501_Aug
 )
-from .image.motchallenge import get_sequence_class, MOTChallenge
+# from .image.motchallenge import get_sequence_class, MOTChallenge # MOTChallenge and its sequences removed
+from .image.motchallenge import get_sequence_class # Keeping get_sequence_class if used elsewhere, otherwise this could be removed too if not.
 from .image.occluded_posetrack21 import OccludedPosetrack21
-from .video import PRID2011, Mars, DukeMTMCVidReID, iLIDSVID
+# from .video import PRID2011, Mars, DukeMTMCVidReID, iLIDSVID # Video datasets removed in previous step
 from .dataset import Dataset, ImageDataset, VideoDataset
 # from .market1501_aug import Market1501_Aug
 
 __image_datasets = {
     'market1501': Market1501,
-    'cuhk03': CUHK03,
     'dukemtmcreid': DukeMTMCreID,
-    'msmt17': MSMT17,
-    'viper': VIPeR,
-    'grid': GRID,
-    'cuhk01': CUHK01,
-    'ilids': iLIDS,
-    'prid': PRID,
-    'cuhk02': CUHK02,
     'occluded_duke': OccludedDuke,
     'occluded_reid': OccludedReID,
     'partial_reid': Partial_REID,
-    'partial_ilids': Partial_iLIDS,
-    'p_ETHZ': P_ETHZ,
     'p_dukemtmc_reid': PDukemtmcReid,
-    'MOTChallenge': MOTChallenge,
-    'MOT17-02': get_sequence_class('MOT17-02-FRCNN'),
-    'MOT17-04': get_sequence_class('MOT17-04-FRCNN'),
-    'MOT17-05': get_sequence_class('MOT17-05-FRCNN'),
-    'MOT17-09': get_sequence_class('MOT17-09-FRCNN'),
-    'MOT17-10': get_sequence_class('MOT17-10-FRCNN'),
-    'MOT17-11': get_sequence_class('MOT17-11-FRCNN'),
-    'MOT17-13': get_sequence_class('MOT17-13-FRCNN'),
+    # 'MOTChallenge': MOTChallenge, # Removed
+    # 'MOT17-02': get_sequence_class('MOT17-02-FRCNN'), # Removed
+    # 'MOT17-04': get_sequence_class('MOT17-04-FRCNN'), # Removed
+    # 'MOT17-05': get_sequence_class('MOT17-05-FRCNN'), # Removed
+    # 'MOT17-09': get_sequence_class('MOT17-09-FRCNN'), # Removed
+    # 'MOT17-10': get_sequence_class('MOT17-10-FRCNN'), # Removed
+    # 'MOT17-11': get_sequence_class('MOT17-11-FRCNN'), # Removed
+    # 'MOT17-13': get_sequence_class('MOT17-13-FRCNN'), # Removed
     'occ_PoseTrack21': OccludedPosetrack21,
     'market1501_aug':Market1501_Aug,
 }
 
 __datasets_nicknames = {
     'market1501': 'mk',
-    'cuhk03': 'c03',
     'dukemtmcreid': 'du',
-    'msmt17': 'ms',
-    'viper': 'vi',
-    'grid': 'gr',
-    'cuhk01': 'c01',
-    'ilids': 'il',
-    'sensereid': 'se',
-    'prid': 'pr',
-    'cuhk02': 'c02',
+    'sensereid': 'se', # This was not in the deleted list, keeping
     'occluded_duke': 'od',
     'occluded_reid': 'or',
     'partial_reid': 'pr',
-    'partial_ilids': 'pi',
-    'p_ETHZ': 'pz',
     'p_dukemtmc_reid': 'pd',
     'occ_PoseTrack21': 'opt',
     'market1501_aug': 'mka',
