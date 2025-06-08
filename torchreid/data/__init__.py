@@ -4,7 +4,7 @@ from .datasets import (
     Dataset, ImageDataset, VideoDataset, register_image_dataset,
     register_video_dataset, get_dataset_nickname, get_image_dataset
 )
-from .datamanager import ImageDataManager, VideoDataManager
+from .datamanager import ImageDataManager
 from .datasets.keypoints_to_masks import parts_info_per_strat
 from .masks_transforms import masks_preprocess_all
 
