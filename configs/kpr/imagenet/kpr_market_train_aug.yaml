@@ -1,0 +1,34 @@
+data:
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 384
+  width: 128
+  
+  norm_mean: [0.485, 0.456, 0.406]
+  norm_std: [0.229, 0.224, 0.225]
+  aug_ratio : 0.1
+  bipo:
+    p: 0.05
+sampler:
+  train_sampler : RandomIdentitySampler
+model:
+  kpr:
+    backbone: swin_base_patch4_window7_224.ms_in22k_ft_in1k
+    keypoints:
+      prompt_masks: keypoints_gaussian
+      prompt_preprocess: cck6
+    masks:
+      dir: "pifpaf_maskrcnn_filtering"
+      preprocess: "five_v"
+  transreid:
+    cam_num: 6
+train:
+  warmup_t: 10
+  batch_size : 64
+  max_epoch : 150
+  accumulation_steps : 1
+loss:
+  triplet: 
+    margin : 0.5
+    weight_t : 7.0
+    weight_x : 3.0

@@ -1,0 +1,48 @@
+data:
+  # sources: ['market1501_aug']
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 384
+  width: 128
+  norm_mean: [0.5, 0.5, 0.5]
+  norm_std: [0.5, 0.5, 0.5]
+  transforms: ["rc", "re", "bipo"]
+  aug_ratio : 0.0
+  bipo:
+    p: 0.2
+sampler:
+  train_sampler : RandomIdentitySampler
+
+model:
+  kpr:
+    backbone: "solider_swin_base_patch4_window7_224"
+    keypoints:
+      prompt_masks: keypoints_gaussian
+      prompt_preprocess: cck6
+    masks:
+      dir: "pifpaf_maskrcnn_filtering"
+      preprocess: "five_v"
+  transreid:
+    cam_num: 6
+train:
+  lr: 0.0002
+  reduced_lr: 0.0002
+  fixbase_epoch: 20
+  warmup_t: 10
+  batch_size : 64
+  accumulation_steps : 1
+  max_epoch : 150
+loss:
+  triplet: 
+    margin : 0.5
+    weight_t : 7.0
+    weight_x : 3.0
+  supercon:
+    enabled : True
+    temperature: 0.05
+    weight: 1.0
+    mode: "global"
+    weight_global: 0.4
+    weight_concat: 0.6
+    norm_type: 2.0
+    # hard_mining: True

@@ -1,0 +1,61 @@
+data:
+  sources: ['market1501']
+  # sources: ['market1501']
+  targets: ['market1501']
+  height: 384
+  width: 128
+  norm_mean: [0.5, 0.5, 0.5]
+  norm_std: [0.5, 0.5, 0.5]
+  transforms: ["rc", "re", "bipo"]
+  aug_ratio : 0.2
+  bipo:
+    p: 0.2
+sampler:
+  train_sampler : RandomIdentitySampler
+
+model:
+  kpr:
+    backbone: "solider_swin_base_patch4_window7_224"
+    keypoints:
+      prompt_masks: keypoints_gaussian
+      prompt_preprocess: cck6
+    masks:
+      dir: "pifpaf_maskrcnn_filtering"
+      preprocess: "five_v"
+  transreid:
+    cam_num: 6
+train:
+  lr: 0.0002
+  reduced_lr: 0.0002
+  fixbase_epoch: 20
+  warmup_t: 10
+  batch_size : 96
+  accumulation_steps : 1
+  max_epoch : 200
+loss:
+  # part_based:
+  #   weights:
+  #     globl:
+  #       id: 1.0       # 원래 값 유지
+  #       tr: 0.5       # 추가 (전체 체형 학습)
+  #     foreg:
+  #       id: 1.0       # 원래 값 유지
+  #       tr: 0.5       # 추가 (전경 영역 학습)
+      # conct:
+      #   id: 0.8       # 원래 값 유지
+  #       tr: 0.6       # 추가 (통합 파트 학습)
+  #     parts:
+  #       id: 0.0       # 원래 값 유지
+  #       tr: 0.7       # 감소 (1.0 → 0.7, 과적합 완화)
+  triplet: 
+    margin : 0.5
+  supercon:
+    enabled: True
+    temperature: 0.07
+    weight: 1.0       # 원래 값 유지
+    mode: "global"      # 유지
+    weight_global: 1.0  # 증가 (체형/실루엣 강화)
+    weight_concat: 0.4  # 감소 (파트 의존도 감소)
+    norm_type: 2.0
+    hard_mining: False
+    hard_mining_ratio: 0.4

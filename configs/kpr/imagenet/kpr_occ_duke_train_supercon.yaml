@@ -1,0 +1,57 @@
+# Override default values in 'scripts/default_config.py'
+
+data:
+  sources: ['occluded_duke']
+  targets: ['occluded_duke']
+  height: 256
+  width: 128
+  norm_mean: [0.485, 0.456, 0.406]
+  norm_std: [0.229, 0.224, 0.225]
+  bipo:
+    p: 0.3
+sampler:
+  train_sampler: "RandomIdentitySampler"
+  train_sampler_t: "RandomIdentitySampler"
+  num_instances: 6
+model:
+  kpr:
+    keypoints:
+      kp_dir: 'pifpaf_keypoints_pifpaf_maskrcnn_filtering_v3'
+      prompt_masks: keypoints_gaussian
+      prompt_preprocess: cck8
+      filter_out_no_skeletons: True
+    masks:
+      dir: "pifpaf_maskrcnn_filtering"
+      preprocess: "eight"
+  transreid:
+    cam_num: 8
+train:
+  warmup_t: 10
+  batch_size : 96
+  max_epoch : 200
+  accumulation_steps : 1
+loss:
+  # part_based:
+  #   weights:
+  #     globl:
+  #       id: 1
+  #       tr: 0.0
+  #     foreg:
+  #       id: 1
+  #       tr: 0.0
+  #     conct:
+  #       id: 1
+  #       tr: 0.0
+  #     parts:
+  #       id: 0.0
+  #       tr: 1
+  triplet: 
+    margin : 0.5
+    weight_t : 0.7
+    weight_x : 0.3
+  supercon:
+    enabled: True
+    weight: 1.0
+    mode: "concat_parts"           # "global", "concat_parts", "both"
+    weight_global: 0.0  # global 임베딩에 대한 SuperCon 가중치
+    weight_concat: 1.0    # concat_parts 임베딩에 대한 SuperCon 가중치
