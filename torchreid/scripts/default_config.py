@@ -905,12 +905,6 @@ def get_default_config():
     cfg.market1501.use_500k_distractors = (
         False  # add 500k distractors to the gallery set for market1501
     )
-    cfg.cuhk03 = CN()
-    cfg.cuhk03.labeled_images = (
-        False  # use labeled images, if False, use detected images
-    )
-    cfg.cuhk03.classic_split = False  # use classic split by Li et al. CVPR14
-    cfg.cuhk03.use_metric_cuhk03 = False  # use cuhk03's metric for evaluation
 
     cfg.occluded_posetrack = CN()
     cfg.occluded_posetrack.enable_dataset_sampling_loading = True
@@ -1128,8 +1122,6 @@ def imagedata_kwargs(cfg):
         "train_sampler": cfg.sampler.train_sampler,
         "train_sampler_t": cfg.sampler.train_sampler_t,
         # image
-        "cuhk03_labeled": cfg.cuhk03.labeled_images,
-        "cuhk03_classic_split": cfg.cuhk03.classic_split,
         "market1501_500k": cfg.market1501.use_500k_distractors,
         "masks_dir": cfg.model.kpr.masks.dir,
     }
@@ -1202,7 +1194,6 @@ def engine_run_kwargs(cfg):
         "visrank_topk": cfg.test.visrank_topk,
         "visrank_q_idx_list": cfg.test.visrank_q_idx_list,
         "visrank_count": cfg.test.visrank_count,
-        "use_metric_cuhk03": cfg.cuhk03.use_metric_cuhk03,
         "ranks": cfg.test.ranks,
         "rerank": cfg.test.rerank,
         "save_features": cfg.test.save_features,
