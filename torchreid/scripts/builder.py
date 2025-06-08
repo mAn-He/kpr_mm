@@ -358,10 +358,7 @@ from torchreid.utils.engine_state import EngineState
 
 
 def build_datamanager(cfg):
-    if cfg.data.type == "image":
-        return torchreid.data.ImageDataManager(**imagedata_kwargs(cfg))
-    else:
-        return torchreid.data.VideoDataManager(**videodata_kwargs(cfg))
+    return torchreid.data.ImageDataManager(**imagedata_kwargs(cfg))
 
 
 def build_engine(cfg, datamanager, model, optimizer, scheduler, writer, engine_state):
@@ -445,37 +442,6 @@ def build_engine(cfg, datamanager, model, optimizer, scheduler, writer, engine_s
                 batch_size_pairwise_dist_matrix=cfg.test.batch_size_pairwise_dist_matrix,
                 mask_filtering_training=cfg.model.kpr.mask_filtering_training,
                 mask_filtering_testing=cfg.model.kpr.mask_filtering_testing,
-            )
-        
-    else:
-        if cfg.loss.name == "softmax":
-            engine = torchreid.engine.VideoSoftmaxEngine(
-                datamanager,
-                model,
-                optimizer=optimizer,
-                scheduler=scheduler,
-                use_gpu=cfg.use_gpu,
-                label_smooth=cfg.loss.softmax.label_smooth,
-                pooling_method=cfg.video.pooling_method,
-                save_model_flag=cfg.model.save_model_flag,
-                writer=writer,
-                engine_state=engine_state,
-            )
-
-        else:
-            engine = torchreid.engine.VideoTripletEngine(
-                datamanager,
-                model,
-                optimizer=optimizer,
-                margin=cfg.loss.triplet.margin,
-                weight_t=cfg.loss.triplet.weight_t,
-                weight_x=cfg.loss.triplet.weight_x,
-                scheduler=scheduler,
-                use_gpu=cfg.use_gpu,
-                label_smooth=cfg.loss.softmax.label_smooth,
-                save_model_flag=cfg.model.save_model_flag,
-                writer=writer,
-                engine_state=engine_state,
             )
 
     return engine
