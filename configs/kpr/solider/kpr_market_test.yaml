@@ -11,7 +11,7 @@ data:
 
 model:
   load_weights: "pretrained_models/pretrained_weights/kpr_market_SOLIDER_93.25_96.59_41453430.pth.tar"
-  # "/scratch/ghtmd9277/keypoint_promptable_reidentification/pretrained_models/pretrained_weights/kpr_market_SOLIDER_93.25_96.59_41453430.pth.tar"
+  # "./pretrained_models/pretrained_weights/kpr_market_SOLIDER_93.25_96.59_41453430.pth.tar"
   # "
   pretrained: False
   kpr:

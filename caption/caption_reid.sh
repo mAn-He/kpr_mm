@@ -5,7 +5,7 @@ echo "### START DATE=$(date)"
 echo "### HOSTNAME=$(hostname)"
 
 
-cd /scratch/ghtmd9277/keypoint_promptable_reidentification || exit
+cd . || exit
 
 
 # conda 환경 활성화
@@ -18,7 +18,7 @@ ml load cuda/11.0
 
 # Python 스크립트 실행
 # python /scratch/ghtmd9277/keypoint_promptable_reidentification/accel_aug_occuld_duke_final.py
-python /scratch/ghtmd9277/keypoint_promptable_reidentification/caption/multiturn_caption.py
+python caption/multiturn_caption.py
 # 작업 종료 로그 출력
 echo "###"
 echo "### END DATE=$(date)"

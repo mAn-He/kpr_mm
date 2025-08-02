@@ -160,7 +160,9 @@ kp_files = {
 def read_keypoints(kp_path, bbox_ltwh=None):
     got_kp = False
     if not osp.exists(kp_path):
-        raise IOError('Keypoints file"{}" does not exist'.format(kp_path))
+        print('Warning: Keypoints file"{}" does not exist, returning empty keypoints'.format(kp_path))
+        # Return empty keypoints instead of raising error
+        return np.zeros((1, 17, 3))
     while not got_kp:
         try:
             target_found = False
@@ -244,3 +246,22 @@ def extract_test_embeddings(model_output, test_embeddings):
     embeddings_masks = torch.cat(embeddings_masks_list, dim=1)  # [N, P+2, Hf, Wf]
 
     return embeddings, visibility_scores, embeddings_masks, pixels_cls_scores
+def read_iou(csv_path, image_name=None):
+    """Read IOU value from CSV file for specific image"""
+    import pandas as pd
+
+    if not os.path.exists(csv_path):
+        return np.array([0.0])  # 파일이 없으면 0 반환
+
+    df = pd.read_csv(csv_path)
+
+    if image_name is None:
+        # 전체 IOU 값 반환
+        return df['iou'].values
+    else:
+        # 특정 이미지의 IOU 값 반환
+        row = df[df['image_name'] == image_name]
+        if len(row) > 0:
+            return np.array([row.iloc[0]['iou']])
+        else:
+            return np.array([0.0])  # 해당 이미지가 없으면 0 반환
