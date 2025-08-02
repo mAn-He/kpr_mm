@@ -26,8 +26,8 @@ model:
     cam_num: 6
   text_prompt:
     enabled: False
-    train_json_path: "/home/hseung/keypoint_promptable_reidentification/Market-1501-v15.09.15/market1501_train_caption.json"
-    query_json_path: "/home/hseung/keypoint_promptable_reidentification/Market-1501-v15.09.15/person_descriptions_query.json"
+    train_json_path: "./Market-1501-v15.09.15/market1501_train_caption.json"
+    query_json_path: "./Market-1501-v15.09.15/person_descriptions_query.json"
     clip_model_name: "ViT-B/32"
     fusion_layer: 0
     feature_dim_match: True

@@ -60,8 +60,8 @@ FOLLOW_UP_PROMPT = (
 )
 
 DEFAULT_IMAGE_FOLDER = (
-    "/scratch/ghtmd9277/keypoint_promptable_reidentification/Occluded_Duke/"
-    # "/home/hseung/keypoint_promptable_reidentification/Market-1501-v15.09.15/"
+    "./Occluded_Duke/"
+    # "./Market-1501-v15.09.15/"
     # "bounding_box_train"
     "query"
 )

@@ -5,7 +5,7 @@ echo "### START DATE=$(date)"
 echo "### HOSTNAME=$(hostname)"
 
 
-cd /scratch/ghtmd9277/keypoint_promptable_reidentification || exit
+cd . || exit
 
 
 # conda 환경 활성화
@@ -17,7 +17,7 @@ ml purge
 ml load cuda/11.0
 
 # Python 스크립트 실행
-python /scratch/ghtmd9277/keypoint_promptable_reidentification/main.py --config-file /scratch/ghtmd9277/keypoint_promptable_reidentification/configs/kpr/imagenet/kpr_market_train_aug_supercon_text.yaml
+python main.py --config-file configs/kpr/imagenet/kpr_market_train_aug_supercon_text.yaml
 
 # 작업 종료 로그 출력
 echo "###"

@@ -190,9 +190,9 @@ def main():
     )
 
     # Paths
-    input_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/bounding_box_train"
-    mask_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/market_mask"
-    output_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/aug_market_inpainting_5prompts" # Changed output dir
+    input_dir = "./Market-1501-v15.09.15/bounding_box_train"
+    mask_dir = "./Market-1501-v15.09.15/market_mask"
+    output_dir = "./Market-1501-v15.09.15/aug_market_inpainting_5prompts" # Changed output dir
 
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)

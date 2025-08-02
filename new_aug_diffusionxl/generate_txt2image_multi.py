@@ -171,9 +171,9 @@ def main():
     print(f"Found {num_gpus} GPUs")
     
     # 경로 설정
-    input_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/bounding_box_train"
-    mask_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/market_mask"
-    output_dir = "/scratch/ghtmd9277/keypoint_promptable_reidentification/Market-1501-v15.09.15/aug_market_inpainting_5prompts"
+    input_dir = "./Market-1501-v15.09.15/bounding_box_train"
+    mask_dir = "./Market-1501-v15.09.15/market_mask"
+    output_dir = "./Market-1501-v15.09.15/aug_market_inpainting_5prompts"
     
     # 출력 디렉토리 생성
     os.makedirs(output_dir, exist_ok=True)
